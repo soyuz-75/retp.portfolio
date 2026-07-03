@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RET.P — Organic Abstract Art</title>
+<meta name="description" content="Portfolio of RET.P — French artist creating organic, line-based abstract paintings. Exhibited at Le Bon Marché, Espace Futur and Galerie Calderone.">
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --ink: #171512;
+    --muted: #6f6a61;
+    --line: rgba(23, 21, 18, 0.12);
+    --card: #ffffff;
+    --accent: #2e5741; /* deep green from the canvases */
+    --accent-2: #8c2f39; /* burgundy red */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .serif { font-family: Georgia, 'Times New Roman', serif; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5vw;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+  }
+  .logo img {
+    height: 46px;
+    width: auto;
+    display: block;
+  }
+
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-left: 28px;
+    opacity: 0.75;
+    transition: opacity 0.25s;
+  }
+  nav a:hover { opacity: 1; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8vh 5vw 6vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero { grid-template-columns: 0.9fr 1.1fr; }
+  }
+
+  .hero h1 {
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+  }
+
+  .hero .kicker {
+    font-size: 0.78rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+
+  .hero p.lead {
+    margin-top: 24px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+
+  .hero-cta {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn.solid { background: var(--ink); color: var(--bg); }
+  .btn.solid:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* ---------- Interactive showcase ---------- */
+  .showcase {
+    position: relative;
+    background: var(--card);
+    padding: 14px;
+    box-shadow: 0 24px 60px rgba(23, 21, 18, 0.12);
+  }
+  .showcase img { width: 100%; display: block; }
+
+  .hotspot {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(246, 244, 239, 0.92);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s, background 0.25s;
+    animation: pulse 2.4s infinite;
+  }
+  .hotspot:hover, .hotspot.active {
+    background: var(--ink);
+    color: var(--bg);
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(23,21,18,0.30); }
+    70%  { box-shadow: 0 0 0 14px rgba(23,21,18,0); }
+    100% { box-shadow: 0 0 0 0 rgba(23,21,18,0); }
+  }
+
+  .spot-caption {
+    margin-top: 14px;
+    padding: 16px 18px;
+    border: 1px dashed var(--line);
+    font-size: 0.92rem;
+    color: var(--muted);
+    min-height: 76px;
+    transition: opacity 0.3s;
+  }
+  .spot-caption strong {
+    display: block;
+    color: var(--ink);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: 10vh 5vw; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-title {
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 48px;
+  }
+
+  /* ---------- Gallery ---------- */
+  #gallery { background: #efece5; }
+
+  .filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 10px 20px;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+  .grid {
+    columns: 3 280px;
+    column-gap: 22px;
+  }
+  .art-card {
+    break-inside: avoid;
+    margin-bottom: 22px;
+    background: var(--card);
+    padding: 12px 12px 16px;
+    cursor: zoom-in;
+    box-shadow: 0 8px 26px rgba(23, 21, 18, 0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .art-card.hidden { display: none; }
+  .art-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 44px rgba(23, 21, 18, 0.14);
+  }
+  .art-card img { width: 100%; display: block; }
+  .art-card figcaption {
+    padding-top: 12px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .art-card figcaption b {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- Works index ---------- */
+  .works-list { border-top: 1px solid var(--line); }
+  .work-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 20px 4px;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.25s, padding-left 0.25s;
+  }
+  @media (min-width: 700px) {
+    .work-row { grid-template-columns: 2fr 2fr 1fr 1fr; align-items: baseline; }
+  }
+  .work-row:hover { background: rgba(255,255,255,0.6); padding-left: 14px; }
+  .work-title { font-family: Georgia, serif; font-size: 1.15rem; }
+  .work-meta { color: var(--muted); font-size: 0.88rem; }
+
+  /* ---------- Process video band (top banner) ---------- */
+  .process-band {
+    position: relative;
+    height: 80vh;
+    min-height: 460px;
+    overflow: hidden;
+  }
+  .process-band video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* subtle darkening only at the very top, so the sticky header stays legible */
+  .process-band .veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(23,21,18,0.28), rgba(23,21,18,0) 22%);
+    pointer-events: none;
+  }
+
+  /* ---------- About ---------- */
+  #about { background: var(--ink); color: var(--bg); }
+  #about .section-title { color: var(--bg); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  @media (min-width: 900px) {
+    .about-grid { grid-template-columns: 1.2fr 0.8fr; }
+  }
+
+  blockquote {
+    font-family: Georgia, serif;
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+    line-height: 1.45;
+    font-style: italic;
+    border-left: 2px solid var(--accent);
+    padding-left: 26px;
+    margin: 34px 0;
+    color: #e9e6df;
+  }
+  blockquote span {
+    display: block;
+    font-size: 0.8rem;
+    font-style: normal;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-top: 14px;
+    color: #9c968b;
+  }
+
+  #about p { color: #bdb8ae; max-width: 62ch; }
+  #about p + p { margin-top: 18px; }
+
+  .expo-list { list-style: none; border-top: 1px solid rgba(246,244,239,0.18); }
+  .expo-list li {
+    padding: 18px 2px;
+    border-bottom: 1px solid rgba(246,244,239,0.18);
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    font-size: 0.95rem;
+  }
+  .expo-list .where { color: #e9e6df; }
+  .expo-list .what { color: #9c968b; text-align: right; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 9vh 5vw;
+    text-align: center;
+  }
+  footer .big-link {
+    font-family: Georgia, serif;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    transition: color 0.25s, border-color 0.25s;
+  }
+  footer .big-link:hover { color: var(--accent-2); border-color: var(--accent-2); }
+  footer .small {
+    margin-top: 34px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  footer .small a { color: var(--muted); }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 14, 12, 0.93);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: zoom-out;
+    padding: 4vh 4vw;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; box-shadow: 0 30px 90px rgba(0,0,0,0.5); }
+  .lightbox .close {
+    position: absolute;
+    top: 22px; right: 30px;
+    color: #f6f4ef;
+    font-size: 1.6rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#top" aria-label="RET.P — home">
+    <img src="images/logo.png" alt="RET.P">
+  </a>
+  <nav>
+    <a href="#gallery">Works</a>
+    <a href="#about">About</a>
+    <a href="https://www.instagram.com/retp_art/" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+</header>
+
+<!-- ================= PROCESS VIDEO (top banner) ================= -->
+<div class="process-band" id="top">
+  <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="video/retp-drawing-loop.mp4" type="video/mp4">
+  </video>
+  <div class="veil"></div>
+</div>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div>
+    <div class="kicker">Paris — Abstract &amp; Organic</div>
+    <h1>Lines drawn<br>from the<br>unconscious.</h1>
+    <p class="lead">
+      RET.P builds dense, organic networks of lines — in marker, acrylic and tufted wool —
+      that trace the flow of a mind at full concentration. From Le Bon Marché to
+      Galerie Calderone, his canvases turn interior walls into living tissue.
+    </p>
+    <div class="hero-cta">
+      <a class="btn solid" href="#gallery">View works</a>
+      <a class="btn" href="https://www.instagram.com/retp_art/" target="_blank" rel="noopener">@retp_art</a>
+    </div>
+  </div>
+
+  <!-- Featured image -->
+  <div>
+    <div class="showcase">
+      <img src="images/new-magenta.jpg" alt="RET.P painting installed in a Parisian apartment">
+    </div>
+  </div>
+</div>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery">
+  <div class="section-inner">
+    <h2 class="section-title reveal">Selected pieces &amp; installations</h2>
+    <p class="section-sub reveal">Original works, exhibitions and studio views. Click any image to enlarge.</p>
+
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="work">Works</button>
+      <button class="filter-btn" data-filter="expo">Exhibitions &amp; in situ</button>
+      <button class="filter-btn" data-filter="studio">Studio</button>
+    </div>
+
+    <div class="grid">
+      <!-- ===== New interior visualizations ===== -->
+      <figure class="art-card reveal" data-cat="expo" data-full="images/new-magenta.jpg">
+        <img src="images/new-magenta.jpg" alt="Magenta and blue RET.P painting in a Haussmannian Paris salon" loading="lazy">
+        <figcaption><b>In situ — Paris</b>Magenta &amp; blue flow, Haussmannian salon</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/new-pink.jpg">
+        <img src="images/new-pink.jpg" alt="Pink and red RET.P painting in a Parisian living room" loading="lazy">
+        <figcaption><b>In situ — Paris</b>Pink &amp; red flow, Haussmannian salon</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/new-green.jpg">
+        <img src="images/new-green.jpg" alt="Green RET.P painting in a minimalist gallery-like room" loading="lazy">
+        <figcaption><b>In situ — Gallery space</b>Green flow, minimalist interior</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/new-blue.jpg">
+        <img src="images/new-blue.jpg" alt="Blue and red RET.P painting above curved bouclé sofas" loading="lazy">
+        <figcaption><b>In situ — Bouclé salon</b>Blue flow, curved seating</figcaption>
+      </figure>
+
+      <!-- ===== Works ===== -->
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-20.jpg">
+        <img src="images/work-20.jpg" alt="Deep red organic line painting by RET.P, detail" loading="lazy">
+        <figcaption><b>Flow — deep red</b>Acrylic, detail</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-03.jpg">
+        <img src="images/work-03.jpg" alt="Burgundy line network on paper by RET.P" loading="lazy">
+        <figcaption><b>Flow — burgundy</b>Work on paper</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-19.jpg">
+        <img src="images/work-19.jpg" alt="Magenta and white organic line work by RET.P" loading="lazy">
+        <figcaption><b>Flow — magenta</b>Work on paper</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-17.jpg">
+        <img src="images/work-17.jpg" alt="Horizontal red line painting in wooden frame by RET.P" loading="lazy">
+        <figcaption><b>Flow — red, horizontal</b>Framed work</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-16.jpg">
+        <img src="images/work-16.jpg" alt="Green organic line network under glass by RET.P" loading="lazy">
+        <figcaption><b>Flow — green</b>Framed under glass</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-05.jpg">
+        <img src="images/work-05.jpg" alt="Dark green interlaced lines painting by RET.P" loading="lazy">
+        <figcaption><b>Interlacing — deep green</b>Acrylic on canvas</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-02.jpg">
+        <img src="images/work-02.jpg" alt="Pale blue brushstrokes on crimson canvas by RET.P" loading="lazy">
+        <figcaption><b>Blue flow on crimson</b>Acrylic on canvas</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/original-canvas.jpeg">
+        <img src="images/original-canvas.jpeg" alt="Green flow on crimson ground, unstretched canvas by RET.P" loading="lazy">
+        <figcaption><b>Green flow on crimson</b>Acrylic, unstretched canvas</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-09.jpg">
+        <img src="images/work-09.jpg" alt="Pink, red and lilac gestural painting by RET.P" loading="lazy">
+        <figcaption><b>Gestural — pink &amp; red</b>Acrylic, detail</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-10.jpg">
+        <img src="images/work-10.jpg" alt="Orange fire-like abstract painting by RET.P" loading="lazy">
+        <figcaption><b>A Touche of Fire</b>Acrylic on paper — 159 × 146 cm, 2022</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-12.jpg">
+        <img src="images/work-12.jpg" alt="Orange to burgundy gradient painting at the framer's workshop" loading="lazy">
+        <figcaption><b>Gradient — orange to wine</b>At the framer's</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="work" data-full="images/work-08.jpg">
+        <img src="images/work-08.jpg" alt="Copper arcs on red and blue ground, large horizontal canvas by RET.P" loading="lazy">
+        <figcaption><b>Copper arcs</b>Large format, acrylic on canvas</figcaption>
+      </figure>
+
+      <!-- ===== Exhibitions & in situ ===== -->
+      <figure class="art-card reveal" data-cat="expo" data-full="images/work-06.jpg">
+        <img src="images/work-06.jpg" alt="RET.P red line work beside a sculpture by Aymeric Louvet at Galerie Calderone" loading="lazy">
+        <figcaption><b>Galerie Calderone, Dinard</b>With sculptor Aymeric Louvet</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/work-11.jpg">
+        <img src="images/work-11.jpg" alt="Three framed RET.P works on an art fair booth wall" loading="lazy">
+        <figcaption><b>Art fair</b>Gallery booth presentation</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/retp-insta-14.jpg">
+        <img src="images/retp-insta-14.jpg" alt="RET.P paintings hung in the dining room of Mauro Café" loading="lazy">
+        <figcaption><b>Mauro Café, Paris</b>In-situ installation</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/work-15.jpg">
+        <img src="images/work-15.jpg" alt="Large orange line painting in a modern hallway" loading="lazy">
+        <figcaption><b>Hallway installation</b>Large-format flow, orange</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/work-13.jpg">
+        <img src="images/work-13.jpg" alt="Purple wall mural signed RET.P" loading="lazy">
+        <figcaption><b>Wall mural</b>Signed in-situ painting</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/retp-insta-09.jpg">
+        <img src="images/retp-insta-09.jpg" alt="Dark bronze RET.P work in a private kitchen interior" loading="lazy">
+        <figcaption><b>Private collection</b>Bronze flow, kitchen interior</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/retp-insta-12.jpg">
+        <img src="images/retp-insta-12.jpg" alt="Green framed RET.P work standing on parquet floor" loading="lazy">
+        <figcaption><b>Fresh from the framer</b>Flow — green, oak frame</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/retp-insta-15.jpg">
+        <img src="images/retp-insta-15.jpg" alt="Green leaf-motif canvas on a terrace wall" loading="lazy">
+        <figcaption><b>Terrace installation</b>Leaf motif, outdoor hanging</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/retp-insta-13.jpg">
+        <img src="images/retp-insta-13.jpg" alt="Yellow and purple hand-tufted rug designed by RET.P" loading="lazy">
+        <figcaption><b>Tufted rug — Bernard Tapis</b>Hand-tufted collaboration</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/vert-apartment-1.jpeg">
+        <img src="images/vert-apartment-1.jpeg" alt="Visualization of a RET.P canvas in a Parisian apartment with Eiffel Tower view" loading="lazy">
+        <figcaption><b>Interior visualization</b>Parisian apartment (AI-staged)</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="expo" data-full="images/blue-interior.jpeg">
+        <img src="images/blue-interior.jpeg" alt="Visualization of the blue flow canvas in an artist's living room" loading="lazy">
+        <figcaption><b>Interior visualization</b>Collector's salon (AI-staged)</figcaption>
+      </figure>
+
+      <!-- ===== Studio ===== -->
+      <figure class="art-card reveal" data-cat="studio" data-full="images/work-04.jpg">
+        <img src="images/work-04.jpg" alt="Bright red line canvas standing in the studio against graffiti" loading="lazy">
+        <figcaption><b>Studio</b>Fresh canvas — red flow</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="studio" data-full="images/retp-insta-16.jpg">
+        <img src="images/retp-insta-16.jpg" alt="RET.P drawing lines on a yellow canvas on the studio floor" loading="lazy">
+        <figcaption><b>At work</b>Lines on yellow, studio floor</figcaption>
+      </figure>
+      <figure class="art-card reveal" data-cat="studio" data-full="images/retp-insta-18.jpg">
+        <img src="images/retp-insta-18.jpg" alt="RET.P painting grey lines on a blue panel in the studio" loading="lazy">
+        <figcaption><b>Process</b>Grey flow on blue panel</figcaption>
+      </figure>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="section-inner about-grid">
+    <div class="reveal">
+      <h2 class="section-title">About the artist</h2>
+      <blockquote>
+        « Ce que je sais, c'est que ces œuvres sont le fruit de mon inconscient
+        le plus profond et par conséquent de mon vrai moi. »
+        <span>— RET.P</span>
+      </blockquote>
+      <p>
+        RET.P is a young French artist driven by visual arts and music. At seventeen,
+        after a difficult period, he began drawing with a marker found in his dorm room —
+        time carved out to escape, pause and breathe. Drawing became a way to heal.
+      </p>
+      <p>
+        His style sharpened year after year, leading to a first exhibition in 2018 at
+        Le Bon Marché in Paris. Each piece is his <em>flow</em>: the moment of maximum
+        concentration and engagement, when the line runs by itself. The works that
+        emerge are both a picture of how he sees the world and a release from it.
+      </p>
+    </div>
+    <div class="reveal">
+      <img src="images/retp-insta-19.jpg" alt="Portrait of RET.P holding a red flow canvas"
+           style="width: 100%; max-width: 380px; display: block; margin-bottom: 36px; box-shadow: 0 18px 50px rgba(0,0,0,0.4);">
+      <h2 class="section-title" style="font-size: 1.3rem;">Exhibitions &amp; collaborations</h2>
+      <ul class="expo-list">
+        <li><span class="where">Le Bon Marché, Paris</span><span class="what">First exhibition — 2018</span></li>
+        <li><span class="where">Espace Futur, Paris</span><span class="what">Solo show — “The Flow”</span></li>
+        <li><span class="where">Galerie Calderone, Dinard</span><span class="what">With sculptor Aymeric Louvet</span></li>
+        <li><span class="where">Mauro Café, Paris</span><span class="what">In-situ installation</span></li>
+        <li><span class="where">Bernard Tapis</span><span class="what">Hand-tufted rug collaborations</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <a class="big-link" href="https://www.instagram.com/retp_art/" target="_blank" rel="noopener">Follow @retp_art</a>
+  <div class="small">
+    Represented by <a href="https://www.galeriecalderone.com/retp" target="_blank" rel="noopener">Galerie Calderone</a>
+    &nbsp;·&nbsp; © 2026 RET.P
+  </div>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lightbox" id="lightbox">
+  <button class="close" aria-label="Close">✕</button>
+  <img src="" alt="Enlarged artwork">
+</div>
+
+<script>
+  // --- Gallery filters ---
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.art-card').forEach(card => {
+        card.classList.toggle('hidden', f !== 'all' && card.dataset.cat !== f);
+      });
+    });
+  });
+
+  // --- Lightbox ---
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  document.querySelectorAll('.art-card').forEach(card => {
+    card.addEventListener('click', () => {
+      // Use the card's own (inlined) image so the lightbox works even when the
+      // page is shared as a single self-contained file with no images/ folder.
+      const img = card.querySelector('img');
+      lightboxImg.src = (img && img.src) || card.dataset.full;
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') lightbox.classList.remove('open');
+  });
+
+  // --- Process video: play only when visible ---
+  const bandVideo = document.querySelector('.process-band video');
+  if (bandVideo) {
+    const tryPlay = () => bandVideo.play().catch(() => {});
+    new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? tryPlay() : bandVideo.pause());
+    }, { threshold: 0.15 }).observe(bandVideo);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) tryPlay();
+    });
+  }
+
+  // --- Reveal on scroll ---
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
